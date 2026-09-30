@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>братишка с днюхой! 🎉</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <style>
+    :root {
+      --bg: #0f111a;
+      --card-bg: #181b29;
+      --accent: #ff477e;
+      --accent-hover: #ff5c8a;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: #2e344e;
+      --code-bg: #090a0f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 15px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 25px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 71, 126, 0.15);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 71, 126, 0.3);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+    }
+
+    /* TERMINAL SECTION */
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .terminal-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #a9b7c6;
+      overflow-x: auto;
+    }
+
+    .code-comment { color: #6a9955; }
+    .code-keyword { color: #cc7832; }
+    .code-string { color: #6a8759; }
+    .code-func { color: #ffc66d; }
+
+    /* LETTER CARD */
+    .letter-title {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .letter-content {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      white-space: pre-line;
+      line-height: 1.7;
+    }
+
+    .handwritten-sign {
+      font-family: 'Caveat', cursive;
+      font-size: 1.8rem;
+      text-align: right;
+      color: var(--accent);
+      margin-top: 15px;
+    }
+
+    /* CAKE SECTION */
+    .cake-container {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .cake-icon {
+      font-size: 4rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .cake-icon:hover {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* WISH GENERATOR */
+    .wish-box {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 15px;
+      border-left: 3px solid var(--accent);
+      font-style: italic;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">братишке</div>
+      <h1>С днём рождения, <span>Аяулым</span>! 🎉</h1>
+      <p class="subtitle">Роднюш крч не обижайся что так поздравляю и ты тип такое не любишь же по идееее</p>
+    </header>
+
+    <!-- CODE SECTION -->
+    <div class="card">
+      <div class="terminal-header">
+        <div class="dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="terminal-title">birthday_script.js</div>
+      </div>
+      <div class="terminal-body">
+        <span class="code-comment">// Запущено специально в честь Днюхи</span><br>
+        <span class="code-keyword">const</span> friend = <span class="code-string">"Аяулым (Аяу)"</span>;<br>
+        <span class="code-func">function</span> <span class="code-func">generateWish</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"Будь счастлива одним словом пилотик "</span>;<br>
+        }<br><br>
+        <span class="code-comment">// Статус:, чистый душевный рукажопский сайт</span>
+      </div>
+    </div>
+
+    <!-- MAIN LETTER -->
+    <div class="card">
+      <div class="letter-title">Аяулым, роднюш</div>
+      <div class="letter-content">
+Братишка с днём рождения тебя
+
+братишка не унывай крч если ктото обидит не обижайся ктото ударит не удараяйся крч солай солай типо
+
+и много не грусти не идет тебе это 
+
+и агушы много пей братишка
+      </div>
+      <div class="handwritten-sign">не уывай одним словом</div>
+    </div>
+
+    <!-- CAKE & CONFETTI -->
+    <div class="card">
+      <div class="cake-container">
+        <div class="cake-icon" id="cake" onclick="popConfetti()">🎂</div>
+        <p style="margin-top: 10px; font-weight: 600;">нажми на торт пж </p>
+        <p class="subtitle" style="font-size: 0.85rem;">загадывай желание</p>
+        <button class="btn" onclick="popConfetti()">🎉 чо думаешь нажимай</button>
+      </div>
+    </div>
+
+    <!-- WISH GENERATOR -->
+    <div class="card">
+      <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Рандомайзер пожеланий крч</h3>
+      <p class="subtitle">ебанутый пожеланий менде </p>
+      <div class="wish-box" id="wishDisplay">
+        я далбаеб ваще другую кнопку ебанул сорян туда нажми да побр
+      </div>
+      <button class="btn btn-secondary" onclick="nextWish()">сюда</button>
+    </div>
+
+    <footer>
+      
+    </footer>
+  </div>
+
+  <script>
+    function popConfetti() {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+
+    const wishes = [
+      "много не унывай лучше в этой жизни всегда есть в любой ситуаций выход",
+      "пилот болып мены катать ет нах",
+      "здоровье береги прежде всего",
+      "завязывай уже с желанием курить и пить",
+      "никогда не сомневайся в себе",
+      "без суеты болып журсын омыр"
+    ];
+
+    function nextWish() {
+      const display = document.getElementById('wishDisplay');
+      const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+      display.style.opacity = 0;
+      setTimeout(() => {
+        display.innerText = randomWish;
+        display.style.opacity = 1;
+      }, 150);
+    }
+  </script>
+</body>
+</html>
